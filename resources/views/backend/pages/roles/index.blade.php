@@ -1,7 +1,7 @@
 
 @extends('backend.index')
 
-@section('title', 'Dashboard')
+@section('title', 'Roles')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
@@ -12,14 +12,14 @@
     <div class="row align-items-center">
         <div class="col-sm-6">
             <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Dashboard</h4>
+                <h4 class="page-title pull-left">Roles</h4>
             </div>
         </div>
         <div class="col-sm-6 clearfix">
             <div class="user-profile pull-right">
                 <ul class="breadcrumbs pull-left">
                     <li><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li><span>Dashboard</span></li>
+                    <li><span>Roles</span></li>
                 </ul>
             </div>
         </div>
@@ -198,7 +198,7 @@
                     <div class="testimonial-carousel owl-carousel">
                         <div class="tst-item">
                             <div class="tstu-img">
-                                <img src="assets/images/team/team-author1.jpg" alt="author image">
+                                <img src="{{ asset('/') }}assets/images/team/team-author1.jpg" alt="author image">
                             </div>
                             <div class="tstu-content">
                                 <h4 class="tstu-name">Abel Franecki</h4>
@@ -208,7 +208,7 @@
                         </div>
                         <div class="tst-item">
                             <div class="tstu-img">
-                                <img src="assets/images/team/team-author2.jpg" alt="author image">
+                                <img src="{{ asset('/') }}assets/images/team/team-author2.jpg" alt="author image">
                             </div>
                             <div class="tstu-content">
                                 <h4 class="tstu-name">Abel Franecki</h4>
@@ -218,7 +218,7 @@
                         </div>
                         <div class="tst-item">
                             <div class="tstu-img">
-                                <img src="assets/images/team/team-author3.jpg" alt="author image">
+                                <img src="{{ asset('/') }}assets/images/team/team-author3.jpg" alt="author image">
                             </div>
                             <div class="tstu-content">
                                 <h4 class="tstu-name">Abel Franecki</h4>
