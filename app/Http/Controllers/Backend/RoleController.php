@@ -26,7 +26,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $data['roles'] = Role::all();
+        return view('backend.pages.roles.create', $data);
     }
 
     /**
@@ -37,7 +38,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
