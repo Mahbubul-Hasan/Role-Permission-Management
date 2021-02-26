@@ -237,7 +237,7 @@
         });
     }
 
-    $.each($(".active"), function (index, value) {
+    $.each($("#menu .active"), function (index, value) {
         $(value).parent().addClass("in");
         $(value).parent().parent().addClass("active");
     });

@@ -14,8 +14,8 @@
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Rols</span></a>
                         <ul class="collapse">
-                            <li><a href="index.html">Add Role</a></li>
-                            <li class="{{ (request()->routeIs('roles.*')) ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Role List</a></li>
+                            <li class="{{ (request()->routeIs('roles.create')) ? 'active' : '' }}"><a href="{{ route('roles.create') }}">Add Role</a></li>
+                            <li class="{{ (request()->routeIs(['roles.index', 'roles.edit'])) ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Role List</a></li>
                         </ul>
                     </li>
                 </ul>

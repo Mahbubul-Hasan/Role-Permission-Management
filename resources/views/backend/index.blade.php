@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/metisMenu.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
 
     <!-- amcharts css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -68,6 +69,7 @@
         <script src="{{ asset('assets/js/metisMenu.min.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
+        <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
 
         @yield('js')
         <!-- others plugins -->

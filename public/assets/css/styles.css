@@ -2190,6 +2190,10 @@ table.dataTable thead td {
     border-color: #999;
 }
 
+.data-tables table {
+    width: 100% !important;
+    margin: 0;;
+}
 /*-------------------- END Datatable ------------------- */
 
 
