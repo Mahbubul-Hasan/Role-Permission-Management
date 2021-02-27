@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -26,7 +27,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $data['roles'] = Role::all();
+        $data['permissions'] = Permission::all();
         return view('backend.pages.roles.create', $data);
     }
 
@@ -38,7 +39,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $role = Role::create(['name' => $request->name]);
+        $role->syncPermissions($request->permissions);
+        return  redirect()->route('roles.index');
     }
 
     /**
