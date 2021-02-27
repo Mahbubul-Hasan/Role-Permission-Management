@@ -27,7 +27,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $data['permissions'] = Permission::all();
+        $data['permissions'] = Permission::all()->groupBy('group_name');
         return view('backend.pages.roles.create', $data);
     }
 

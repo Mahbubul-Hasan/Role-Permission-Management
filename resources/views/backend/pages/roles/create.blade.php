@@ -51,20 +51,30 @@
                             <div class="col-sm-10">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="checkAll">
-                                    <label class="custom-control-label" for="checkAll">All</label>
+                                    <label class="custom-control-label" for="checkAll"><h6 class="text-capitalize font-weight-bolder">All</h6></label>
                                 </div>
-                                <hr/>
-                                @foreach ($permissions as $permission)
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="permissions-checkbox custom-control-input" id="customCheck{{ $loop->index + 1 }}" name="permissions[]" value="{{ $permission->id }}">
-                                    <label class="custom-control-label" for="customCheck{{ $loop->index + 1 }}">{{ $permission->name }}</label>
+                                <div class="row">
+                                    @foreach ($permissions as $key => $values)
+                                    <div class="col-sm-2 mt-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="permissions-checkbox custom-control-input" id="customCheck-{{ $key }}" name="permissions[]" value="{{ $key }}">
+                                            <label class="custom-control-label" for="customCheck-{{ $key }}"><h6 class="text-capitalize font-weight-bolder">{{ $key }}</h6></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 mt-3">
+                                        @foreach ($values as $value)
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="permissions-checkbox custom-control-input" id="customCheck{{ $value->id }}" name="permissions[]" value="{{ $value->name }}">
+                                            <label class="custom-control-label" for="customCheck{{ $value->id }}">{{ $value->name }}</label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
                             </div>
                         </div>
                         <button type="submit" class="btn btn-flat btn-primary float-right mt-2 px-5">Create Role</button>
                     </form>
-                    <button class="btn btn-primary float-right mt-2 px-5">noty({text: "Hello World!"});</button>
                 </div>
             </div>
         </div>
