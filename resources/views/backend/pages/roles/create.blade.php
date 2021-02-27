@@ -46,6 +46,17 @@
                                 <input type="text" name="name" class="form-control" id="inputRole">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
+                            <div class="col-sm-10">
+                                @foreach ($permissions as $permission)
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck{{ $loop->index + 1 }}" name="permissions[]" value="{{ $permission->id }}">
+                                    <label class="custom-control-label" for="customCheck{{ $loop->index + 1 }}">{{ $permission->name }}</label>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary float-right mt-2 px-5">Create Role</button>
                     </form>
                 </div>
