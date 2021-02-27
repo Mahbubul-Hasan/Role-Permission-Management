@@ -41,6 +41,8 @@ class RoleController extends Controller
     {
         $role = Role::create(['name' => $request->name]);
         $role->syncPermissions($request->permissions);
+
+        $this->successMessage('Role and permission create successfully');
         return  redirect()->route('roles.index');
     }
 

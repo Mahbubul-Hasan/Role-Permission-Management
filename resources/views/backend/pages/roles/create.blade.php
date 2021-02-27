@@ -47,18 +47,24 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
+                            <label for="inputRole" class="col-sm-2 col-form-label">Permissions</label>
                             <div class="col-sm-10">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkAll">
+                                    <label class="custom-control-label" for="checkAll">All</label>
+                                </div>
+                                <hr/>
                                 @foreach ($permissions as $permission)
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck{{ $loop->index + 1 }}" name="permissions[]" value="{{ $permission->id }}">
+                                    <input type="checkbox" class="permissions-checkbox custom-control-input" id="customCheck{{ $loop->index + 1 }}" name="permissions[]" value="{{ $permission->id }}">
                                     <label class="custom-control-label" for="customCheck{{ $loop->index + 1 }}">{{ $permission->name }}</label>
                                 </div>
                                 @endforeach
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary float-right mt-2 px-5">Create Role</button>
+                        <button type="submit" class="btn btn-flat btn-primary float-right mt-2 px-5">Create Role</button>
                     </form>
+                    <button class="btn btn-primary float-right mt-2 px-5">noty({text: "Hello World!"});</button>
                 </div>
             </div>
         </div>
@@ -66,6 +72,7 @@
     </div>
 </div>
 @endsection
+
 @section('js')
 <!-- Start datatable js -->
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
@@ -73,4 +80,19 @@
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+@endsection
+
+@section('extra_js')
+<script>
+    $("#checkAll").click(function(){
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
+    $(".permissions-checkbox").change(function(){
+        if ($('.permissions-checkbox:checked').length == $('.permissions-checkbox').length) {
+            $('#checkAll').prop('checked', true);
+        } else {
+            $('#checkAll').prop('checked', false);
+        }
+    })
+</script>
 @endsection
