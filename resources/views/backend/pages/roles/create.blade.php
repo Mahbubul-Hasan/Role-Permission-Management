@@ -57,17 +57,17 @@
                                     @foreach ($permissions as $key => $values)
                                     <div class="col-sm-2 mt-3">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="permissions-checkbox custom-control-input" id="customCheck-{{ $key }}" name="permissions[]" value="{{ $key }}">
-                                            <label class="custom-control-label" for="customCheck-{{ $key }}"><h6 class="text-capitalize font-weight-bolder">{{ $key }}</h6></label>
+                                            <input type="checkbox" class="permission-group-name permission-checkbox custom-control-input" id="checkAll-{{ $key }}" onchange="checkPermissionByGroupName('group-name-{{ $key }}', this)">
+                                            <label class="custom-control-label" for="checkAll-{{ $key }}"><h6 class="text-capitalize font-weight-bolder">{{ $key }}</h6></label>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2 mt-3">
-                                        @foreach ($values as $value)
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="permissions-checkbox custom-control-input" id="customCheck{{ $value->id }}" name="permissions[]" value="{{ $value->name }}">
-                                            <label class="custom-control-label" for="customCheck{{ $value->id }}">{{ $value->name }}</label>
+                                        <div class="group-name-{{ $key }}">
+                                            @foreach ($values as $item)
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="permission-name permission-checkbox custom-control-input" id="permission-{{ $item->id }}" name="permissions[]" value="{{ $item->name }}" onchange="checkPermission(this)">
+                                                <label class="custom-control-label" for="permission-{{ $item->id }}">{{ $item->name }}</label>
+                                            </div>
+                                            @endforeach
                                         </div>
-                                        @endforeach
                                     </div>
                                     @endforeach
                                 </div>
@@ -96,13 +96,32 @@
 <script>
     $("#checkAll").click(function(){
         $('input:checkbox').not(this).prop('checked', this.checked);
-    });
-    $(".permissions-checkbox").change(function(){
-        if ($('.permissions-checkbox:checked').length == $('.permissions-checkbox').length) {
+    })
+
+    $(".permission-checkbox").change(function(){
+        if ($('.permission-checkbox:checked').length == $('.permission-checkbox').length) {
             $('#checkAll').prop('checked', true);
         } else {
             $('#checkAll').prop('checked', false);
         }
     })
+
+    function checkPermissionByGroupName(groupNameclass, groupId){
+        groupNameclass = $('.'+groupNameclass+' input');
+        groupNameclass.not(groupId).prop('checked', groupId.checked);
+    }
+
+    function checkPermission(permissionsid){
+        const groupNameCheckboxId = "#"+$("#"+permissionsid.id).parent().parent().parent().find('.permission-group-name').get(0).id
+        const permissionsCheckbox = $("#"+permissionsid.id).parent().parent().find('.permission-name').length
+        const permissionsCheckboxChecked = $("#"+permissionsid.id).parent().parent().find('.permission-name:checked').length
+
+        if (permissionsCheckbox == permissionsCheckboxChecked) {
+            $(groupNameCheckboxId).prop('checked', true);
+        } else {
+            $(groupNameCheckboxId).prop('checked', false);
+        }
+    }
+
 </script>
 @endsection
