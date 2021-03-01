@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-// return $request;
+
     }
 
     /**
