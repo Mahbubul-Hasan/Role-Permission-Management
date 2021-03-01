@@ -43,7 +43,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->permissions);
 
         $this->successMessage('Role and permission create successfully');
-        return  redirect()->route('roles.index');
+        return  redirect()->route('admin.roles.index');
     }
 
     /**
@@ -77,9 +77,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $role->update(['name' => $request->name]);
+        $role->syncPermissions($request->permissions);
+
+        $this->successMessage('Role and permission Update successfully');
+        return  redirect()->route('admin.roles.index');
     }
 
     /**
@@ -88,8 +92,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        $this->successMessage('Role and permission Delete successfully');
+        return  true;
     }
 }

@@ -1,5 +1,5 @@
 (function ($) {
-    "use strict";
+    ("use strict");
 
     /*================================
     Preloader
@@ -241,4 +241,23 @@
         $(value).parent().addClass("in");
         $(value).parent().parent().addClass("active");
     });
+
+    // start delete record
+    $(".delete-item").click(function () {
+        if (confirm("Do you really want to delete record?")) {
+            let url = $(this).data("url");
+            let token = $(this).data("token");
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: { _method: "DELETE", _token: token },
+                dataType: "JSON",
+                success: function () {
+                    location.reload();
+                },
+            });
+        }
+    });
+    // end delete record
+
 })(jQuery);

@@ -15,7 +15,7 @@
             <div class="user-profile pull-right">
                 <ul class="breadcrumbs pull-left">
                     <li><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li><a href="{{ route('roles.index') }}">Roles</a></li>
+                    <li><a href="{{ route('admin.roles.index') }}">Roles</a></li>
                     <li><span>Create Role</span></li>
                 </ul>
             </div>
@@ -30,7 +30,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Create Role</h4>
-                    <form action="{{ route('roles.store') }}" method="POST">
+                    <form action="{{ route('admin.roles.store') }}" method="POST">
                         @csrf
                         <div class="form-group row">
                             <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
@@ -76,35 +76,5 @@
 @endsection
 
 @section('extra_js')
-<script>
-    $("#checkAll").click(function(){
-        $('input:checkbox').not(this).prop('checked', this.checked);
-    })
-
-    $(".permission-checkbox").change(function(){
-        if ($('.permission-checkbox:checked').length == $('.permission-checkbox').length) {
-            $('#checkAll').prop('checked', true);
-        } else {
-            $('#checkAll').prop('checked', false);
-        }
-    })
-
-    function checkPermissionByGroupName(groupNameclass, groupId){
-        groupNameclass = $('.'+groupNameclass+' input');
-        groupNameclass.not(groupId).prop('checked', groupId.checked);
-    }
-
-    function checkPermission(permissionsid){
-        const groupNameCheckboxId = "#"+$("#"+permissionsid.id).parent().parent().parent().find('.permission-group-name').get(0).id
-        const permissionsCheckbox = $("#"+permissionsid.id).parent().parent().find('.permission-name').length
-        const permissionsCheckboxChecked = $("#"+permissionsid.id).parent().parent().find('.permission-name:checked').length
-
-        if (permissionsCheckbox == permissionsCheckboxChecked) {
-            $(groupNameCheckboxId).prop('checked', true);
-        } else {
-            $(groupNameCheckboxId).prop('checked', false);
-        }
-    }
-
-</script>
+<script src="{{ asset('assets/js/multyCheckbox.js') }}"></script>
 @endsection

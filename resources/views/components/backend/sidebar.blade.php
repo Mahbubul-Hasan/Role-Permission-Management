@@ -12,10 +12,10 @@
                         <a href="{{ route('admin.dashboard') }}"><i class="ti-dashboard"></i><span>dashboard</span></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Rols</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Rols & Permissions</span></a>
                         <ul class="collapse">
-                            <li class="{{ (request()->routeIs('roles.create')) ? 'active' : '' }}"><a href="{{ route('roles.create') }}">Add Role</a></li>
-                            <li class="{{ (request()->routeIs(['roles.index', 'roles.edit'])) ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Role List</a></li>
+                            <li class="{{ (request()->routeIs('admin.roles.create')) ? 'active' : '' }}"><a href="{{ route('admin.roles.create') }}">Add Role</a></li>
+                            <li class="{{ (request()->routeIs(['admin.roles.index', 'admin.roles.edit'])) ? 'active' : '' }}"><a href="{{ route('admin.roles.index') }}">Role List</a></li>
                         </ul>
                     </li>
                 </ul>

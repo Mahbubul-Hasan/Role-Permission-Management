@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">Role List</h4>
-                        <a class="btn btn-flat btn-primary text-light mb-3" href="{{ route('roles.create') }}"><i class="fa fa-plus"></i> Add Role</a>
+                        <a class="btn btn-flat btn-primary text-light mb-3" href="{{ route('admin.roles.create') }}"><i class="fa fa-plus"></i> Add Role</a>
                     </div>
                     <div class="data-tables datatable-dark">
                         <table id="dataTable" class="text-center">
@@ -46,6 +46,7 @@
                                 <tr>
                                     <th>SN</th>
                                     <th>Role</th>
+                                    <th>Permissions</th>
                                     <th>Guard</th>
                                     <th>Action</th>
                                 </tr>
@@ -54,12 +55,17 @@
                                 @forelse ($roles as $role)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ Str::ucfirst($role->name) }}</td>
+                                    <td nowrap>{{ Str::ucfirst($role->name) }}</td>
+                                    <td class="text-left">
+                                        @foreach ($role->permissions as $permission)
+                                        <span class="badge badge-primary p-1 mr-1">{{ $permission->name }}</span>
+                                        @endforeach
+                                    </td>
                                     <td>{{ $role->guard_name }}</td>
                                     <td>
                                         <div class="btn-group mb-xl-3" role="group" aria-label="Button group with nested dropdown">
-                                            <a href="{{ route('roles.edit', $role) }}" class="btn btn-xs btn-flat btn-info"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a href="button" class="btn btn-xs btn-flat btn-danger"><i class="fa fa-trash-o"></i></a>
+                                            <a class="btn btn-xs btn-flat btn-info" href="{{ route('admin.roles.edit', $role->id) }}" ><i class="fa fa-pencil-square-o"></i></a>
+                                            <a class="btn btn-xs btn-flat btn-danger delete-item" href="javascript:void(0)" data-url="{{ route('admin.roles.destroy', $role->id) }}" data-token="{{ csrf_token() }}"> <i class="fa fa-trash-o"></i> </a>
                                         </div>
                                     </td>
                                 </tr>
