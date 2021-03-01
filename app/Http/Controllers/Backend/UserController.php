@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\User\StoreUserRequest;
+use App\Http\Requests\Backend\User\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -40,6 +41,10 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        $request->storeUserData();
+
+        $this->successMessage('User has been created successfully');
+        return redirect()->route('admin.users.index');
 
     }
 
@@ -60,9 +65,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $data['user']  = $user;
+        $data['roles'] = Role::all();
+        return view('backend.users.edit', $data);
     }
 
     /**
@@ -72,9 +79,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $request->updateUserData($user);
+
+        $this->successMessage('User has been updated successfully');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -83,8 +93,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        $this->successMessage('User has been deleted successfully');
+        return true;
     }
 }

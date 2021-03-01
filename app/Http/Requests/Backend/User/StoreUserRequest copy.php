@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Backend\User;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserRequest extends FormRequest
@@ -24,8 +26,21 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
+            'email'    => 'required|email|unique:users',
             'roles'    => 'required',
             'password' => 'required|confirmed|min:6',
         ];
+    }
+
+    public function storeUserData()
+    {
+        $user = User::create([
+            'name'     => $this->name,
+            'email'    => $this->email,
+            'password' => Hash::make($this->password),
+        ]);
+
+        // assign multiple roles at once
+        $user->assignRole($this->roles);
     }
 }

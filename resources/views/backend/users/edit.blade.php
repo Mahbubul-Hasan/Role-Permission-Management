@@ -1,22 +1,26 @@
 
 @extends('backend.index')
 
-@section('title', 'Update Role')
+@section('title', 'Update User')
+
+@section('css')
+<link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" />
+@endsection
 
 @section('content')
 <div class="page-title-area">
     <div class="row align-items-center">
         <div class="col-sm-6">
             <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Roles</h4>
+                <h4 class="page-title pull-left">Uses</h4>
             </div>
         </div>
         <div class="col-sm-6 clearfix">
             <div class="user-profile pull-right">
                 <ul class="breadcrumbs pull-left">
                     <li><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li><a href="{{ route('admin.roles.index') }}">Roles</a></li>
-                    <li><span>Update Role</span></li>
+                    <li><a href="{{ route('admin.users.index') }}">Users</a></li>
+                    <li><span>Update User</span></li>
                 </ul>
             </div>
         </div>
@@ -29,43 +33,48 @@
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Update Role</h4>
-                    <form action="{{ route('admin.roles.update', $role->id) }}" method="POST">
+                    <h4 class="header-title">Create User</h4>
+                    <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                         @csrf @method('PUT')
                         <div class="form-group row">
-                            <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
+                            <label for="inputName" class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" value="{{ $role->name }}" class="form-control" id="inputRole">
+                                <input type="text" name="name" class="form-control form-control-sm" id="inputName" value="{{ old('name') ?? $user->name }}" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputRole" class="col-sm-2 col-form-label">Permissions</label>
+                            <label for="inputEmail" class="col-sm-2 col-form-label">Email <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="checkAll" {{ App\Models\User::roleHasPermissions($role, Spatie\Permission\Models\Permission::all()) ? 'checked': '' }}>
-                                    <label class="custom-control-label" for="checkAll"><h6 class="text-capitalize font-weight-bolder">All</h6></label>
-                                </div>
-                                <div class="row">
-                                    @foreach ($permissions as $key => $values)
-                                    <div class="col-sm-2 mt-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="permission-group-name permission-checkbox custom-control-input" id="checkAll-{{ $key }}" onchange="checkPermissionByGroupName('group-name-{{ $key }}', this)" {{ App\Models\User::roleHasPermissions($role, $values) ? 'checked': '' }}>
-                                            <label class="custom-control-label" for="checkAll-{{ $key }}"><h6 class="text-capitalize font-weight-bolder">{{ $key }}</h6></label>
-                                        </div>
-                                        <div class="group-name-{{ $key }}">
-                                            @foreach ($values as $item)
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="permission-name permission-checkbox custom-control-input" id="permission-{{ $item->id }}" name="permissions[]" value="{{ $item->name }}" onchange="checkPermission(this)" {{ $role->hasPermissionTo($item->name) ? 'checked': '' }}>
-                                                <label class="custom-control-label" for="permission-{{ $item->id }}">{{ $item->name }}</label>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
+                                <input type="email" name="email" class="form-control form-control-sm @error('email') is-invalid @enderror" id="inputEmail" value="{{ old('email') ?? $user->email }}" required>
+                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-flat btn-success float-right mt-2 px-5">Update Role</button>
+                        <div class="form-group row">
+                            <label for="inputRole" class="col-sm-2 col-form-label">Roles <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <select id="inputRole" class="form-control form-control-sm @error('roles') is-invalid @enderror" name="roles[]" multiple>
+                                    @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" @if($user->hasRole($role->name)) selected @endif>{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('roles') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" name="password" class="form-control form-control-sm @error('password') is-invalid @enderror" id="inputPassword">
+                                @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputConfirmPassword" class="col-sm-2 col-form-label">Confirm Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" name="password_confirmation" class="form-control form-control-sm @error('password_confirmation') is-invalid @enderror" id="inputConfirmPassword">
+                                @error('password_confirmation') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-flat btn-success float-right mt-2 px-5">Update User</button>
                     </form>
                 </div>
             </div>
@@ -75,6 +84,12 @@
 </div>
 @endsection
 
+@section('js')
+<script src="{{ asset('assets/js/select2.min.js') }}"></script>
+@endsection
+
 @section('extra_js')
-<script src="{{ asset('assets/js/multyCheckbox.js') }}"></script>
+<script>
+    $('#inputRole').select2();
+</script>
 @endsection

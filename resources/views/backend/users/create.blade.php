@@ -56,24 +56,21 @@
                                     <option value="{{ $role->id }}" >{{ $role->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('roles') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Password <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
-                                <input type="password" name="password" class="form-control form-control-sm @error('password') is-invalid @enderror" id="inputEmail" required>
-                                @error('password')
-                                <span class="text-danger">{{ $message }}</sp>
-                                @enderror
+                                <input type="password" name="password" class="form-control form-control-sm @error('password') is-invalid @enderror" id="inputPassword" required>
+                                @error('password') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputConfirmPassword" class="col-sm-2 col-form-label">Confirm Password <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
                                 <input type="password" name="password_confirmation" class="form-control form-control-sm @error('password_confirmation') is-invalid @enderror" id="inputConfirmPassword" required>
-                                @error('password_confirmation')
-                                <span class="text-danger">{{ $message }}</sp>
-                                @enderror
+                                @error('password_confirmation') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <button type="submit" class="btn btn-flat btn-primary float-right mt-2 px-5">Create User</button>
@@ -91,7 +88,6 @@
 @endsection
 
 @section('extra_js')
-<script src="{{ asset('assets/js/multyCheckbox.js') }}"></script>
 <script>
     $('#inputRole').select2();
     $('#inputRole').val({{ str_replace('"', '', json_encode(old('roles'))) }}).change();
