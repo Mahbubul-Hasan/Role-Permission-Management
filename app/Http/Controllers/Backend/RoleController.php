@@ -17,7 +17,7 @@ class RoleController extends Controller
     public function index()
     {
         $data['roles'] = Role::all();
-        return view('backend.pages.roles.index', $data);
+        return view('backend.roles.index', $data);
     }
 
     /**
@@ -28,7 +28,7 @@ class RoleController extends Controller
     public function create()
     {
         $data['permissions'] = Permission::all()->groupBy('group_name');
-        return view('backend.pages.roles.create', $data);
+        return view('backend.roles.create', $data);
     }
 
     /**
@@ -65,7 +65,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return $role;
+        $data['role']        = $role;
+        $data['permissions'] = Permission::all()->groupBy('group_name');
+        return view('backend.roles.edit', $data);
     }
 
     /**
