@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login - srtdash</title>
+    <title>Login - {{ config('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('/') }}assets/images/icon/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/icon/shield.png') }}">
     <link rel="stylesheet" href="{{ asset('/') }}assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/') }}assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('/') }}assets/css/themify-icons.css">
@@ -37,13 +37,13 @@
                     <div class="login-form-body">
                         <div class="form-gp">
                             <label for="inputEmail">Email address</label>
-                            <input type="email" id="inputEmail" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+                            <input type="text" id="inputEmail" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
                             <i class="ti-email"></i>
                             @error('email')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="form-gp">
                             <label for="inputPassword">Password</label>
-                            <input type="password" id="inputPassword" class="@error('email') is-invalid @enderror" name="password">
+                            <input type="password" id="inputPassword" class="@error('email') is-invalid @enderror" name="password" required>
                             <i class="ti-lock"></i>
                             @error('email')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>

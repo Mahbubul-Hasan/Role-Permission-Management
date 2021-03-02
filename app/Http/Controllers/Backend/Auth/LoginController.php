@@ -48,11 +48,11 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email'    => 'required|email',
+            'email'    => 'required',
             'password' => 'required',
         ]);
 
-        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])){
+        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]) || Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password])){
             $this->successMessage("Successfully logged in !");
             return redirect()->intended(route('admin.dashboard'));
         } else {
