@@ -16,4 +16,10 @@ class Controller extends BaseController
         session()->flash('type', 'success');
         session()->flash('message', $message);
     }
+
+    public function errorMessage($message)
+    {
+        session()->flash('type', 'error');
+        session()->flash('message', $message);
+    }
 }
