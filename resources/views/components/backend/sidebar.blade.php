@@ -19,6 +19,13 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Admin</span></a>
+                        <ul class="collapse">
+                            <li class="{{ (request()->routeIs('admin.admins.create')) ? 'active' : '' }}"><a href="{{ route('admin.admins.create') }}">Add Admin</a></li>
+                            <li class="{{ (request()->routeIs(['admin.admins.index', 'admin.admins.edit'])) ? 'active' : '' }}"><a href="{{ route('admin.admins.index') }}">Admin List</a></li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>User</span></a>
                         <ul class="collapse">
                             <li class="{{ (request()->routeIs('admin.users.create')) ? 'active' : '' }}"><a href="{{ route('admin.users.create') }}">Add User</a></li>
