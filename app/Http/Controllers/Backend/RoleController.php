@@ -39,7 +39,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Role::create(['name' => $request->name]);
+        $role = Role::create(['name' => $request->name, 'guard_name' => 'admin']);
         $role->syncPermissions($request->permissions);
 
         $this->successMessage('Role and permission create successfully');
