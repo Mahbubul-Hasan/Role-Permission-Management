@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class AdminFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Admin::class;
 
     /**
      * Define the model's default state.
@@ -24,8 +24,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name'              => 'Client',
-            'email'             => 'client@gmail.com',
+            'name'              => 'Super Admin',
+            'email'             => 'superadmin@gmail.com',
+            'username'          => 'superadmin',
             'email_verified_at' => now(),
             'password'          => Hash::make('123456'),
             'remember_token'    => Str::random(10),

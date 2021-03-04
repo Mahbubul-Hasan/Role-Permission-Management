@@ -35,7 +35,7 @@
                         <div class="form-group row">
                             <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control" id="inputRole">
+                                <input type="text" name="name" class="form-control" id="inputRole" required>
                             </div>
                         </div>
                         <div class="form-group row">
