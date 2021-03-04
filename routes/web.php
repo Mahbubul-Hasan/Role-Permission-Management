@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Backend\AdminController;
-use App\Http\Controllers\Backend\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------

@@ -9,6 +9,14 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:role.index,admin'])->only('index');
+        $this->middleware(['permission:role.create,admin'])->only('create');
+        $this->middleware(['permission:role.show,admin'])->only('show');
+        $this->middleware(['permission:role.edit,admin'])->only('edit');
+        $this->middleware(['permission:role.delete,admin'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

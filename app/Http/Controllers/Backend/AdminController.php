@@ -11,6 +11,14 @@ use App\Http\Requests\Backend\Admin\UpdateAdminRequest;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:admin.index,admin'])->only('index');
+        $this->middleware(['permission:admin.create,admin'])->only('create');
+        $this->middleware(['permission:admin.show,admin'])->only('show');
+        $this->middleware(['permission:admin.edit,admin'])->only('edit');
+        $this->middleware(['permission:admin.delete,admin'])->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

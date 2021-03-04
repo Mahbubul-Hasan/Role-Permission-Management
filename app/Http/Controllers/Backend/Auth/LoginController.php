@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -52,9 +53,12 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]) || Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password])){
+        if (
+            Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]) ||
+            Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password])
+        ) {
             $this->successMessage("Successfully logged in !");
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->route('admin.dashboard');
         } else {
             $this->errorMessage("Invalid email or password !");
             return redirect()->back()->withInput();
@@ -64,7 +68,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
-            $this->successMessage("Successfully logged out !");
-            return redirect()->route('admin.login');
+        $this->successMessage("Successfully logged out !");
+        return redirect()->route('admin.login');
     }
 }

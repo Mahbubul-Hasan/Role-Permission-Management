@@ -8,11 +8,13 @@
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
+                    @if ($admin->can('dashboard.index'))
                     <li class="{{ (request()->routeIs('admin.dashboard')) ? 'active' : '' }}">
                         <a href="{{ route('admin.dashboard') }}"><i class="ti-dashboard"></i><span>dashboard</span></a>
                     </li>
+                    @endif
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Rols & Permissions</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Rols</span></a>
                         <ul class="collapse">
                             <li class="{{ (request()->routeIs('admin.roles.create')) ? 'active' : '' }}"><a href="{{ route('admin.roles.create') }}">Add Role</a></li>
                             <li class="{{ (request()->routeIs(['admin.roles.index', 'admin.roles.edit'])) ? 'active' : '' }}"><a href="{{ route('admin.roles.index') }}">Role List</a></li>
